@@ -1,0 +1,2 @@
+npm i aws-sdk cors express express-fileupload serverless-http serverless-webpack webpack
+echo fs.inotify.max_user_watches=124288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p

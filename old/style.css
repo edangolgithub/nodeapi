@@ -1,0 +1,10 @@
+#ppp {
+    color: aquamarine;
+    border: 1px red solid;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+
+body {
+    background-color: blue;
+}
