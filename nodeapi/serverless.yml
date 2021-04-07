@@ -16,7 +16,7 @@ provider:
     - Effect: Allow
       Action:
         - s3:*       
-      Resource: "arn:aws:s3:::evandangol"
+      Resource: "*"
  
 functions:
   start:

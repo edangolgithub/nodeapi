@@ -8,7 +8,7 @@ const fileUpload = require('express-fileupload');
 var AwsS3 = require('aws-sdk/clients/s3');
 
 const mod = require('./modules/evans3.js')
-const es33 = require("./modules/s3.js")
+
 const evan= require("./modules/evan.js")
 
 const es3 = new AwsS3({
@@ -39,6 +39,13 @@ app.get('/list', async function (req, res) {
   console.log(data)
   res.json({ "data": data });
 });
+
+app.get('/listobjects/:bucketname', async function (req, res) {
+  var data = await mod.listobjects(req.params.bucketname)
+  console.log(data)
+  res.json({ "data": data });
+});
+
 app.get("/user/:userName", async (req, res) => {
   res.send(`Welcome, ${req.params.userName}`);
 })
@@ -58,66 +65,17 @@ app.get('/promise',async (req, res) => {
   res.send(data)
 
 })
+
+
+
+
+app.post('/', (req, res) => res.send("post"))
+
 app.post('/user', (req, res) => {
   console.log(req.body)
   res.json(req.body.name)
 
 })
-app.post('/', (req, res) => res.send("post"))
-
-// app.post('/fupload', upload.single('avatar'), (req, res) => {
-//   try {
-
-//     if (!req.files) {
-//       res.send({
-//         status: false,
-//         message: 'No file uploaded'
-//       });
-//     } else {
-//       //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-//       let avatar = req.files.avatar;
-
-//       //Use the mv() method to place the file in upload directory (i.e. "uploads")
-//       avatar.mv('./uploads/' + avatar.name);
-
-//       //send response
-//       res.send({
-//         status: true,
-//         message: 'File is uploaded',
-//         data: {
-//           name: avatar.name,
-//           mimetype: avatar.mimetype,
-//           size: avatar.size
-//         }
-//       });
-//     }
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// })
-
-
-// app.post('/fupload1', (req, res) => {
-//   try {
-//     console.log(req.file)
-//     console.log(req.files)
-//     console.log("uhiuhu")
-//     if (!req.files) {
-//       res.send({
-//         status: false,
-//         message: 'No file uploaded'
-//       });
-//     } else {
-//       //console.log(req)
-//       es33.uploadFileTos3("ed2021",req.files.avatar)
-
-//       //send response
-//       res.send("uplo");
-//     }
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// })
 
 app.post('/fupload2', async (req, res) => {
   const { files } = req
@@ -184,7 +142,7 @@ app.post('/imageupload', async (req, res) => {
 
 app.post('/fupload3', async (req, res) => {
   const { files } = req
-  const data = es33.fupload3(files.avatar)
+  const data = mod.fupload3(files.avatar)
   console.log(data)
   res.send({
     "response_code": 200,
@@ -192,6 +150,78 @@ app.post('/fupload3', async (req, res) => {
     "response_data": data
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// app.post('/fupload', upload.single('avatar'), (req, res) => {
+//   try {
+
+//     if (!req.files) {
+//       res.send({
+//         status: false,
+//         message: 'No file uploaded'
+//       });
+//     } else {
+//       //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
+//       let avatar = req.files.avatar;
+
+//       //Use the mv() method to place the file in upload directory (i.e. "uploads")
+//       avatar.mv('./uploads/' + avatar.name);
+
+//       //send response
+//       res.send({
+//         status: true,
+//         message: 'File is uploaded',
+//         data: {
+//           name: avatar.name,
+//           mimetype: avatar.mimetype,
+//           size: avatar.size
+//         }
+//       });
+//     }
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// })
+
+
+// app.post('/fupload1', (req, res) => {
+//   try {
+//     console.log(req.file)
+//     console.log(req.files)
+//     console.log("uhiuhu")
+//     if (!req.files) {
+//       res.send({
+//         status: false,
+//         message: 'No file uploaded'
+//       });
+//     } else {
+//       //console.log(req)
+//       es33.uploadFileTos3("ed2021",req.files.avatar)
+
+//       //send response
+//       res.send("uplo");
+//     }
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// })
+
 
 module.exports.start = serverless(app);
 
