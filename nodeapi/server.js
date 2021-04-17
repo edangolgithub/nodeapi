@@ -6,10 +6,13 @@ const app = express()
 var cors = require('cors')
 const fileUpload = require('express-fileupload');
 var AwsS3 = require('aws-sdk/clients/s3');
+var fs = require('fs');
 
-const mod = require('./modules/evans3.js')
+const evans3 = require('./modules/evans3.js')
 
 const evan= require("./modules/evan.js")
+
+const fil=require("./modules/file.js")
 
 const es3 = new AwsS3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -34,14 +37,28 @@ app.use(express.json());
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
+app.get('/stream', (req, res) => {
+  const src = fs.createReadStream('./modules/file.html');
+  //const src = fs.createReadStream('https://www.freecodecamp.org/news/node-js-streams-everything-you-need-to-know-c9141306be93/');
+  src.pipe(res);
+});
+app.get('/stream1', (req, res) => {
+ fil.readstream(req,res)
+});
+
 app.get('/list', async function (req, res) {
-  var data = await mod.listbuckets()
+  var data = await evans3.listbuckets()
   console.log(data)
   res.json({ "data": data });
 });
 
 app.get('/listobjects/:bucketname', async function (req, res) {
-  var data = await mod.listobjects(req.params.bucketname)
+  var data = await evans3.listobjects(req.params.bucketname)
+  console.log(data)
+  res.json({ "data": data });
+});
+app.get('/listobjectsv2/:bucketname', async function (req, res) {
+  var data = await evans3.listobjectsv2(req.params.bucketname)
   console.log(data)
   res.json({ "data": data });
 });

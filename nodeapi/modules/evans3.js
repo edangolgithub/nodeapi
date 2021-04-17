@@ -90,3 +90,17 @@ export const listobjects = (bucketname) => {
         }
     }).promise();
 }
+export const listobjectsv2 = (bucketname) => {
+    var param = {
+        Bucket: bucketname
+    }
+
+    // Call S3 to obtain a list of the objects in the bucket
+   return s3.listObjectsV2(param, function (err, data) {
+        if (err) {
+            console.log("Error", err);
+        } else {
+            console.log("Success", data);
+        }
+    }).promise();
+}
