@@ -25,7 +25,8 @@ functions:
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
     events:
-      - httpApi: "*"
+      - httpApi: "*"     
+      #- httpApi: 'ANY {proxy+}'
       
 plugins: 
   - serverless-webpack

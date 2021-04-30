@@ -14,4 +14,4 @@ function readstream(filename="a.txt") {
       console.log(err)
     });
   }
-  readstream()
+  //readstream()

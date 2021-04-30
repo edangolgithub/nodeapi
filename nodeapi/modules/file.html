@@ -8,8 +8,14 @@
 </head>
 <body>
     <form action="http://localhost:3000/imageupload" method="post" enctype="multipart/form-data">
-        <input name="image" type="file" />
-        <input type="text" name="folder">
+        <input name="image" placeholder="image" type="file" />
+        <input type="text" placeholder="folder to upload e.g. profile" name="folder">
+        <input type="submit" value="ok">
+    </form>
+    <br>
+    <form action="http://localhost:3000/fileupload" method="post" enctype="multipart/form-data">
+        <input name="file" placeholder="any file" type="file" />
+        <input type="text" placeholder="bucket name" name="bucket">
         <input type="submit" value="ok">
     </form>
     

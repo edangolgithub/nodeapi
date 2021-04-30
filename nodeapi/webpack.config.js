@@ -1,4 +1,5 @@
 const slsw = require('serverless-webpack');
+//process.traceDeprecation = true;
 module.exports = {
   target: 'node',
   entry: slsw.lib.entries,
