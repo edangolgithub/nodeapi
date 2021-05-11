@@ -33,7 +33,7 @@ console.log(ses)
     });
 
     // send email
- const response = await new Promise((rsv, rjt) => {
+ const resp = await new Promise((rsv, rjt) => {
 transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             return rjt(error)
@@ -43,7 +43,7 @@ transporter.sendMail(mailOptions, function (error, info) {
     });
 });
 
-return response;
+return await response(resp);
 
 
 

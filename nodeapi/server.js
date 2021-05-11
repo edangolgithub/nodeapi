@@ -3,7 +3,9 @@
 const serverless = require('serverless-http');
 const express = require('express')
 const app = express()
+
 var cors = require('cors')
+app.use(cors())
 const fileUpload = require('express-fileupload');
 const evans3 = require('./modules/evans3.js')
 const ses = require('./modules/ses')
@@ -11,7 +13,7 @@ const ses = require('./modules/ses')
 app.use(fileUpload({
   createParentPath: true
 }));
-app.use(cors())
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -100,6 +102,11 @@ app.post('/sendemailwithattachment', async (req, res) => {
   console.log(req);
   const data = await  ses.sendemailwithattachment(files, emailAddress, message);
   res.send({
+     "headers": {
+           
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT,DELETE"
+        },
     "response_code": 200,
     "response_message": "Success",
     "response_data": data
