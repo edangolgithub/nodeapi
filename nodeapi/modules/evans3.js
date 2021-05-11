@@ -8,7 +8,7 @@ const s3 = new AwsS3({
 
 const BUCKET_NAME = 'ed2021';
 
-export const createBucket = (bucketName) => {
+module.exports.createBucket = (bucketName) => {
     //const BUCKET_NAME = 'ed2021';
 
     const params = {
@@ -20,7 +20,7 @@ export const createBucket = (bucketName) => {
         else console.log('Bucket Created Successfully', data);
     });
 }
-export async function listbuckets() {
+module.exportslistbuckets=async()=> {
     // Call S3 to list the buckets
     return s3.listBuckets(function (err, data) {
         if (err) {
@@ -32,7 +32,7 @@ export async function listbuckets() {
         }
     }).promise();
 }
-export const listobjects = (bucketname) => {
+module.exports.listobjects = (bucketname) => {
     var param = {
         Bucket: bucketname
     }
@@ -46,7 +46,7 @@ export const listobjects = (bucketname) => {
         }
     }).promise();
 }
-export const listobjectsv2 = (bucketname) => {
+module.exports.listobjectsv2 = (bucketname) => {
     var param = {
         Bucket: bucketname
     }
@@ -62,15 +62,17 @@ export const listobjectsv2 = (bucketname) => {
 }
 
 
-export const fileupload = async (files,bucket="ed2021") => {
+module.exports.fileupload = async (files,bucket="ed2021") => {
     // Binary data base64
+    
     const fileContent = Buffer.from(files.file.data, 'binary');
 
     // Setting up S3 upload parameters
     const params = {
         Bucket: bucket,
         Key: "files/" + files.file.name, // File name you want to save as in S3
-        Body: fileContent
+        Body: fileContent,
+        ContentType:"mime/png"
     };
 
     // Uploading files to the bucket
@@ -84,15 +86,19 @@ export const fileupload = async (files,bucket="ed2021") => {
 }
 
 
-export const uploadimage = async (files, folder, bucket = 'ed2021') => {
+module.exports.uploadimage = async (files, folder, bucket = 'ed2021') => {
     // Binary data base64
-    const fileContent = Buffer.from(files.image.data, 'binary');
-
+    console.log(files.image);
+    const fileContent = Buffer.from(files.image.data, 'base64');
+//console.log(fileContent)
     // Setting up S3 upload parameters
     const params = {
         Bucket: bucket,
         Key: "photos/" + folder + "/" + files.image.name, // File name you want to save as in S3
-        Body: fileContent
+        Body: fileContent,
+        ContentType: files.image.mimetype,
+        ContentEncoding: 'base64'
+        
     };
 
     // Uploading files to the bucket

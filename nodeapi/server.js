@@ -6,7 +6,7 @@ const app = express()
 var cors = require('cors')
 const fileUpload = require('express-fileupload');
 const evans3 = require('./modules/evans3.js')
-
+const ses = require('./modules/ses')
 
 app.use(fileUpload({
   createParentPath: true
@@ -75,14 +75,12 @@ app.post('/fileupload', async (req, res) => {
     });
     return;
   }
-  var bucketname="";
-  if(!req.body.bucket)
-  {
-     bucketname="ed2021"
+  var bucketname = "";
+  if (!req.body.bucket) {
+    bucketname = "ed2021"
   }
-  else
-  {
-    bucketname=req.body.bucket
+  else {
+    bucketname = req.body.bucket
   }
   const data = await evans3.fileupload(files, bucketname);
   res.send({
@@ -92,6 +90,21 @@ app.post('/fileupload', async (req, res) => {
   });
 })
 
+app.post('/sendemailwithattachment', async (req, res) => {
+
+  const { files } = req
+  
+  var emailAddress = req.email
+  var message = req.message
+  console.log(req);
+  console.log(req);
+  const data = await  ses.sendemailwithattachment(files, emailAddress, message);
+  res.send({
+    "response_code": 200,
+    "response_message": "Success",
+    "response_data": data
+  });
+})
 
 module.exports.start = serverless(app);
 

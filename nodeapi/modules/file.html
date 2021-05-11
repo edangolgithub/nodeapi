@@ -7,13 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="http://localhost:3000/imageupload" method="post" enctype="multipart/form-data">
+    <form action="https://s8ygumkk09.execute-api.us-east-1.amazonaws.com/imageupload" method="post" enctype="multipart/form-data">
         <input name="image" placeholder="image" type="file" />
         <input type="text" placeholder="folder to upload e.g. profile" name="folder">
         <input type="submit" value="ok">
     </form>
     <br>
-    <form action="http://localhost:3000/fileupload" method="post" enctype="multipart/form-data">
+    <form action="https://s8ygumkk09.execute-api.us-east-1.amazonaws.com/fileupload" method="post" enctype="multipart/form-data">
+        <input name="file" placeholder="any file" type="file" />
+        <input type="text" placeholder="bucket name" name="bucket">
+        <input type="submit" value="ok">
+    </form>
+    <br>
+    <form action="https://s8ygumkk09.execute-api.us-east-1.amazonaws.com/sendemailwithattachment" method="post" enctype="multipart/form-data">
         <input name="file" placeholder="any file" type="file" />
         <input type="text" placeholder="bucket name" name="bucket">
         <input type="submit" value="ok">

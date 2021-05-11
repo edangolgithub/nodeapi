@@ -25,7 +25,7 @@ functions:
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
     events:
-      - httpApi: "*"     
+      - httpApi: "*"     #comment this for offline and belo uncomment
       #- httpApi: 'ANY {proxy+}'
       
 plugins: 
