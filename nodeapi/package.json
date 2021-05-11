@@ -18,6 +18,7 @@
     "express-fileupload": "^1.2.1",
     "fs": "^0.0.1-security",
     "nodemailer": "^6.6.0",
+    "serverless": "^2.41.0",
     "serverless-http": "^2.7.0",
     "serverless-webpack": "^5.4.0",
     "webpack": "^5.30.0"

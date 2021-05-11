@@ -26,7 +26,7 @@ functions:
 #    Check the event documentation for details
     events:
       - httpApi: "*"     #comment this for offline and belo uncomment
-      #- httpApi: 'ANY {proxy+}'
+      # - httpApi: 'ANY {proxy+}'
       
 plugins: 
   - serverless-webpack

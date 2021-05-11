@@ -19,9 +19,11 @@
         <input type="submit" value="ok">
     </form>
     <br>
-    <form action="https://s8ygumkk09.execute-api.us-east-1.amazonaws.com/sendemailwithattachment" method="post" enctype="multipart/form-data">
+    <form action="http://localhost:3000/sendemail" method="post" enctype="multipart/form-data">
         <input name="file" placeholder="any file" type="file" />
-        <input type="text" placeholder="bucket name" name="bucket">
+        <input type="text" placeholder="message" name="message">
+        <input type="text" placeholder="email" name="email">
+
         <input type="submit" value="ok">
     </form>
     
