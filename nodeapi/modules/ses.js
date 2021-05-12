@@ -7,17 +7,17 @@ const ses = new awsses({ region: "us-east-1" });
 module.exports.sendemailwithattachment = async (files, email, message) => {
   if (files) {
     const fileContent = Buffer.from(files.File.data, "binary");
-    //console.log(fileContent)
-    //console.log(files)
+    console.log(fileContent)
+    console.log(files)
 
-    console.log(ses);
+    //console.log(ses);
     var mailOptions = {
-      from: "dangolevan@gmail.com",
+      from:'"Eco-Friendly LawnLandscaping" <noreply@ecolawnlandscaping.tk>',
       subject: "this is contact us test",
       html: `<p>You got a contact message from: <b>${email}</b>
         message: <p>${message}</p>
         </p>`,
-      to: "dangolevan@gmail.com",
+      to: "dangolevan@gmail.com,mahesh@ecolawnlandscaping.com",
       // bcc: Any BCC address you want here in an array,
       attachments: [
         {
