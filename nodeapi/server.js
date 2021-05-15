@@ -24,8 +24,9 @@ app.use(
   })
 );
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true,limit: '100mb' }));
 app.use(express.json());
+
 // Add headers
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
@@ -95,7 +96,7 @@ app.post("/imageupload", async (req, res) => {
 });
 app.post("/fileupload", async (req, res) => {
   const { files } = req;
-  //console.log(req)
+  console.log(req.body)
   if (!req.files) {
     res.send({
       status: false,

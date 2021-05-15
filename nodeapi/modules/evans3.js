@@ -64,15 +64,16 @@ module.exports.listobjectsv2 = (bucketname) => {
 
 module.exports.fileupload = async (files,bucket="ed2021") => {
     // Binary data base64
-    
-    const fileContent = Buffer.from(files.file.data, 'binary');
+    console.log(files)
+    const fileContent = Buffer.from(files.File.data, 'binary');
 
     // Setting up S3 upload parameters
     const params = {
         Bucket: bucket,
-        Key: "files/" + files.file.name, // File name you want to save as in S3
+        Key: "files/" + files.File.name, // File name you want to save as in S3
         Body: fileContent,
-        ContentType:"mime/png"
+        ACL: 'public-read',
+        ContentType: files.File.mimetype
     };
 
     // Uploading files to the bucket
